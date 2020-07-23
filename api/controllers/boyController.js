@@ -1,9 +1,17 @@
 const Boy = require('./../models/boyModel');
 
+const APIFeatures = require('./../utils/apiFeatures');
+
 exports.getAllBoys = async (req, res) => {
   try {
-    const boys = await Boy.find();
+    const features = new APIFeatures(Boy.find(), req.query)
+      .filter()
+      .sort()
+      .limitFields()
+      .paginate();
+    const boys = await features.query;
 
+    //SEND RESPONSE
     res.status(200).json({
       status: 'success',
       results: boys.length,
@@ -14,22 +22,21 @@ exports.getAllBoys = async (req, res) => {
   } catch (err) {
     res.status(404).json({
       status: 'fail',
-      message: err
-    })
+      message: err,
+    });
   }
 };
 
 exports.getBoy = async (req, res) => {
-
   try {
-    const boy = await Boy.findById(req.params.id)
+    const boy = await Boy.findById(req.params.id);
     if (!boy) {
       return res.status(404).json({
         status: 'fail',
         message: 'Invalid ID',
       });
     }
-  
+
     res.status(200).json({
       status: 'success',
       data: {
@@ -39,8 +46,8 @@ exports.getBoy = async (req, res) => {
   } catch (err) {
     res.status(404).json({
       status: 'fail',
-      message: err
-    })
+      message: err,
+    });
   }
 };
 
@@ -66,34 +73,68 @@ exports.updateBoy = async (req, res) => {
   try {
     const boy = await Boy.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
-    })
+    });
     res.status(200).json({
       status: 'success',
       data: {
-        boy
+        boy,
       },
     });
   } catch (err) {
     res.status(404).json({
       status: 'fail',
-      message: err
-    })
+      message: err,
+    });
   }
 };
 
 exports.deleteBoy = async (req, res) => {
   try {
-    const boy = await Boy.findByIdAndDelete(req.params.id)
+    const boy = await Boy.findByIdAndDelete(req.params.id);
     res.status(204).json({
       status: 'success',
       data: {
-        boy
-      }
+        boy,
+      },
     });
   } catch (err) {
     res.status(404).json({
       status: 'fail',
-      message: err
-    })
+      message: err,
+    });
   }
 };
+
+exports.getBoyStats = async (req, res) => {
+  try {
+    const stats = await Boy.aggregate([
+      {
+        $match: {ratingsAverage: {$gte: 4.5}}
+      },
+      {
+        $group: {
+          _id: '$travelDistance',
+          numBoys: { $sum: 1 },
+          numRatings: { $sum: '$ratingsQuantity' },
+          avgRating: { $avg: '$ratingsAverage' },
+          avgPrice: { $avg: '$price' },
+          minPrice: { $min: '$price' },
+          maxPrice: { $max: '$price' },
+        }
+      }
+    ]);
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        stats
+      },
+    });
+
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err,
+    });
+  }
+}

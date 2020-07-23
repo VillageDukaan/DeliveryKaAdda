@@ -10,6 +10,10 @@ const boySchema = new mongoose.Schema({
       required: [true, 'Mobile Number is Required'],
       unique: true
     },
+    travelDistance: {
+      type: String,
+      required: [true, 'Delivery Person must set delivery distance']
+    },
     ratingsAverage: {
       type: Number,
       default: 4.5
@@ -39,7 +43,8 @@ const boySchema = new mongoose.Schema({
     images: [String],
     createdAt: {
       type: Date,
-      default: Date.now()
+      default: Date.now(),
+      select: false
     },
     isApproved: {
       type: Boolean,

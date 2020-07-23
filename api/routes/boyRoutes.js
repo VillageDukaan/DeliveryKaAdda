@@ -4,12 +4,15 @@ const {
     createBoy,
     getBoy,
     updateBoy,
-    deleteBoy
+    deleteBoy,
+    getBoyStats
 } = require('./../controllers/boyController');
 
 const router = express.Router();
 
-// router.param('id', checkID)
+router.route('/boy-stats').get(getBoyStats)
+
+
 
 router.route('/').get(getAllBoys).post(createBoy);
 router.route('/:id').get(getBoy).patch(updateBoy).delete(deleteBoy);
