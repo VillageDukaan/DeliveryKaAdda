@@ -1,6 +1,7 @@
 const Boy = require('./../models/boyModel');
 const APIFeatures = require('./../utils/apiFeatures');
 const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/appError');
 
 exports.getAllBoys = catchAsync(async (req, res, next) => {
   const features = new APIFeatures(Boy.find(), req.query)
@@ -10,7 +11,6 @@ exports.getAllBoys = catchAsync(async (req, res, next) => {
     .paginate();
   const boys = await features.query;
 
-  //SEND RESPONSE
   res.status(200).json({
     status: 'success',
     results: boys.length,
@@ -22,11 +22,9 @@ exports.getAllBoys = catchAsync(async (req, res, next) => {
 
 exports.getBoy = catchAsync(async (req, res, next) => {
   const boy = await Boy.findById(req.params.id);
+
   if (!boy) {
-    return res.status(404).json({
-      status: 'fail',
-      message: 'Invalid ID',
-    });
+    return next(new AppError('No Delivery Boy found with that ID', 404));
   }
 
   res.status(200).json({
@@ -51,6 +49,11 @@ exports.updateBoy = catchAsync(async (req, res, next) => {
   const boy = await Boy.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
   });
+
+  if (!boy) {
+    return next(new AppError('No Delivery Boy found with that ID', 404));
+  }
+
   res.status(200).json({
     status: 'success',
     data: {
@@ -61,6 +64,11 @@ exports.updateBoy = catchAsync(async (req, res, next) => {
 
 exports.deleteBoy = catchAsync(async (req, res, next) => {
   const boy = await Boy.findByIdAndDelete(req.params.id);
+
+  if (!boy) {
+    return next(new AppError('No Delivery Boy found with that ID', 404));
+  }
+
   res.status(204).json({
     status: 'success',
     data: {
