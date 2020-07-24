@@ -5,12 +5,14 @@ const {
     getBoy,
     updateBoy,
     deleteBoy,
-    getBoyStats
+    getBoyStats,
+    getMonthlyPlan
 } = require('./../controllers/boyController');
 
 const router = express.Router();
 
-router.route('/boy-stats').get(getBoyStats)
+router.route('/boy-stats').get(getBoyStats);
+router.route('/monthly-plan/:year').get(getMonthlyPlan);
 
 
 

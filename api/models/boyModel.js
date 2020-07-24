@@ -51,7 +51,7 @@ const boySchema = new mongoose.Schema({
       default: false
     }
   });
-  
+
   const Boy = mongoose.model('Boy', boySchema);
 
   module.exports = Boy;
