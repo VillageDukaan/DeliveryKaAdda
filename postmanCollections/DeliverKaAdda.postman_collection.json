@@ -1,0 +1,296 @@
+{
+	"info": {
+		"_postman_id": "f1df6731-b552-49ef-9d0a-eb88141825f7",
+		"name": "DeliverKaAdda",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "DeliveryBoy",
+			"item": [
+				{
+					"name": "Create New Boy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bbbc3c50-05eb-4002-ab2b-7e136f170a2f",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"boyID\", jsonData.data.boy._id);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "db82b9f5-3eb8-4254-aec9-552ff8878265",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Mahesh\",\r\n    \"phone\": 9121212115,\r\n    \"travelDistance\": \"Long\",\r\n    \"ratingsAverage\": 2,\r\n    \"ratingsQuantity\": 1000,\r\n    \"price\": 100,\r\n    \"summary\": \"Exquisite wines, scenic views, exclusive barrel tastings,  and much more\",\r\n    \"description\": \"Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\\nIrure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\",\r\n    \"imageCover\": \"tour-7-cover.jpg\",\r\n    \"images\": [\"tour-7-1.jpg\", \"tour-7-2.jpg\", \"tour-7-3.jpg\"],\r\n    \"isApproved\": false\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/{{apiVersion}}/boys",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{apiVersion}}",
+								"boys"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Boys",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/{{apiVersion}}/boys",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{apiVersion}}",
+								"boys"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get A Boy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/{{apiVersion}}/boys/{{boyID}}",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{apiVersion}}",
+								"boys",
+								"{{boyID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Boy",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone\": 9113211111 \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/{{apiVersion}}/boys/{{boyID}}",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{apiVersion}}",
+								"boys",
+								"{{boyID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Boy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/{{apiVersion}}/boys/{{boyID}}",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{apiVersion}}",
+								"boys",
+								"{{boyID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Boy Stats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/{{apiVersion}}/boys/boy-stats",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{apiVersion}}",
+								"boys",
+								"boy-stats"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "Signup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b4a7e563-89c9-4c3e-9f9f-fc83e6c9820c",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"email\", jsonData.data.user.email);\r",
+									"postman.setEnvironmentVariable(\"userID\", jsonData.data.user._id);\r",
+									"postman.setEnvironmentVariable(\"bearerToken\", jsonData.token);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "8a5fb80e-6075-4e47-a776-2c154313de97",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"name\": \"Lova Katari\",\r\n\t\"email\": \"DeliveryKaAdda{{$timestamp}}@gmail.com\",\r\n\t\"password\": \"{{password}}\",\r\n\t\"passwordConfirm\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/{{apiVersion}}/users/signup",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{apiVersion}}",
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "65379b13-a9a2-493a-a28d-c6dbbae954dd",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"bearerToken\", jsonData.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/{{apiVersion}}/users/login",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{apiVersion}}",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllUsers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/{{apiVersion}}/users",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{apiVersion}}",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
