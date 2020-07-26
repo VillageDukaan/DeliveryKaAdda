@@ -13,6 +13,10 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.updateMe = catchAsync(async(req, res, next) => {
+    
+})
+
 exports.createUser = (req, res) => {
     res.status(500).json({
         status: 'error',

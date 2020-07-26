@@ -62,8 +62,24 @@
 				{
 					"name": "Get All Boys",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearerToken}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{url}}:{{port}}/{{apiVersion}}/boys",
 							"host": [
@@ -131,7 +147,13 @@
 					"name": "Delete Boy",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearerToken}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{url}}:{{port}}/{{apiVersion}}/boys/{{boyID}}",
 							"host": [
@@ -174,7 +196,7 @@
 			"name": "users",
 			"item": [
 				{
-					"name": "Signup",
+					"name": "signup",
 					"event": [
 						{
 							"listen": "test",
@@ -283,6 +305,128 @@
 							"path": [
 								"{{apiVersion}}",
 								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{email}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/{{apiVersion}}/users/forgotPassword",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{apiVersion}}",
+								"users",
+								"forgotPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d22a0566-a110-4c38-a635-b6c291d8de88",
+								"exec": [
+									"pm.environment.set('bearerToken', pm.response.json().token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"{{newPassword}}\",\r\n    \"passwordConfirm\": \"{{newPassword}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/{{apiVersion}}/users/resetPassword/364afa91b0a017d381ef0b7926357f03db66537b99ba7396ef1a775307c86a55",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{apiVersion}}",
+								"users",
+								"resetPassword",
+								"364afa91b0a017d381ef0b7926357f03db66537b99ba7396ef1a775307c86a55"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9dcba8c3-21f3-4f0a-b5a6-3159b3f39b0b",
+								"exec": [
+									"pm.environment.set('bearerToken', pm.response.json().token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"passwordCurrent\": \"{{password}}\",\r\n    \"password\": \"{{newPassword}}\",\r\n    \"passwordConfirm\": \"{{newPassword}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/{{apiVersion}}/users/updateMyPassword",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{apiVersion}}",
+								"users",
+								"updateMyPassword"
 							]
 						}
 					},
