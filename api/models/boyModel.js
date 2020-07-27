@@ -49,7 +49,41 @@ const boySchema = new mongoose.Schema({
     isApproved: {
       type: Boolean,
       default: false
-    }
+    },
+    selectedLocation: {
+      type: {
+        type: String,
+        default: 'Point',
+        enum: ['Point']
+      },
+      coordinates: [Number],
+      address: String,
+      description: String
+    },
+    locations: [
+      {
+        type: {
+          type: String,
+          default: 'Point',
+          enum: ['Point']
+        },
+        coordinates: [Number],
+        address: String,
+        description: String,
+        day: Number
+      }
+    ],
+  },
+  {
+      toJSON: { virtuals: true },
+      toObject: { virtuals: true },
+  }
+  );
+
+  boySchema.virtual('reviews', {
+    ref: 'Review',
+    foreignField: 'boy',
+    localField: '_id'
   });
 
   const Boy = mongoose.model('Boy', boySchema);

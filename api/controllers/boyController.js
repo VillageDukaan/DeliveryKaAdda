@@ -21,7 +21,7 @@ exports.getAllBoys = catchAsync(async (req, res, next) => {
 });
 
 exports.getBoy = catchAsync(async (req, res, next) => {
-  const boy = await Boy.findById(req.params.id);
+  const boy = await Boy.findById(req.params.id).populate('reviews')
 
   if (!boy) {
     return next(new AppError('No Delivery Boy found with that ID', 404));
