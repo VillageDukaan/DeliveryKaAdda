@@ -1,41 +1,9 @@
 const Boy = require('./../models/boyModel');
-const APIFeatures = require('./../utils/apiFeatures');
 const catchAsync = require('../utils/catchAsync');
-const AppError = require('../utils/appError');
 const factory = require('./handlerFactory');
 
-exports.getAllBoys = catchAsync(async (req, res, next) => {
-  const features = new APIFeatures(Boy.find(), req.query)
-    .filter()
-    .sort()
-    .limitFields()
-    .paginate();
-  const boys = await features.query;
-
-  res.status(200).json({
-    status: 'success',
-    results: boys.length,
-    data: {
-      boys,
-    },
-  });
-});
-
-exports.getBoy = catchAsync(async (req, res, next) => {
-  const boy = await Boy.findById(req.params.id).populate('reviews')
-
-  if (!boy) {
-    return next(new AppError('No Delivery Boy found with that ID', 404));
-  }
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      boy,
-    },
-  });
-});
-
+exports.getAllBoys = factory.getAll(Boy)
+exports.getBoy = factory.getOne(Boy, { path: 'reviews' });
 exports.createBoy = factory.createOne(Boy);
 exports.updateBoy = factory.updateOne(Boy);
 exports.deleteBoy = factory.deleteOne(Boy);

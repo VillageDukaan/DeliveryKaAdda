@@ -17,7 +17,7 @@
 								"id": "bbbc3c50-05eb-4002-ab2b-7e136f170a2f",
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);\r",
-									"postman.setEnvironmentVariable(\"boyID\", jsonData.data.boy._id);"
+									"postman.setEnvironmentVariable(\"boyID\", jsonData.data.data._id);"
 								],
 								"type": "text/javascript"
 							}
@@ -38,7 +38,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Mahesh\",\r\n    \"phone\": 9121212115,\r\n    \"travelDistance\": \"Long\",\r\n    \"ratingsAverage\": 2,\r\n    \"ratingsQuantity\": 1000,\r\n    \"price\": 100,\r\n    \"summary\": \"Exquisite wines, scenic views, exclusive barrel tastings,  and much more\",\r\n    \"description\": \"Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\\nIrure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\",\r\n    \"imageCover\": \"tour-7-cover.jpg\",\r\n    \"images\": [\"tour-7-1.jpg\", \"tour-7-2.jpg\", \"tour-7-3.jpg\"],\r\n    \"isApproved\": false\r\n  }",
+							"raw": "{\r\n    \"name\": \"Mahesh\",\r\n    \"phone\": 9121212123,\r\n    \"travelDistance\": \"Long\",\r\n    \"ratingsAverage\": 2,\r\n    \"ratingsQuantity\": 1000,\r\n    \"price\": 100,\r\n    \"summary\": \"Exquisite wines, scenic views, exclusive barrel tastings,  and much more\",\r\n    \"description\": \"Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\\nIrure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\",\r\n    \"imageCover\": \"tour-7-cover.jpg\",\r\n    \"images\": [\"tour-7-1.jpg\", \"tour-7-2.jpg\", \"tour-7-3.jpg\"],\r\n    \"isApproved\": false\r\n  }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -60,7 +60,7 @@
 					"response": []
 				},
 				{
-					"name": "Get All Boys",
+					"name": "Get All boys",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -89,6 +89,13 @@
 							"path": [
 								"{{apiVersion}}",
 								"boys"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "price",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -121,7 +128,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"phone\": 9113211111 \r\n}",
+							"raw": "{\r\n    \"phone\": 9113211212\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -297,7 +304,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}:{{port}}/{{apiVersion}}/users",
+							"raw": "{{url}}:{{port}}/{{apiVersion}}/users?role=user",
 							"host": [
 								"{{url}}"
 							],
@@ -305,6 +312,12 @@
 							"path": [
 								"{{apiVersion}}",
 								"users"
+							],
+							"query": [
+								{
+									"key": "role",
+									"value": "user"
+								}
 							]
 						}
 					},
@@ -433,7 +446,7 @@
 					"response": []
 				},
 				{
-					"name": "Update Me",
+					"name": "Delete Me",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -445,7 +458,7 @@
 								}
 							]
 						},
-						"method": "PATCH",
+						"method": "DELETE",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -457,7 +470,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}:{{port}}/{{apiVersion}}/users/updateMe",
+							"raw": "{{url}}:{{port}}/{{apiVersion}}/users/deleteMe",
 							"host": [
 								"{{url}}"
 							],
@@ -465,7 +478,352 @@
 							"path": [
 								"{{apiVersion}}",
 								"users",
-								"updateMe"
+								"deleteMe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/{{apiVersion}}/users/{{userID}}",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{apiVersion}}",
+								"users",
+								"{{userID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Sagar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/{{apiVersion}}/users/{{userID}}",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{apiVersion}}",
+								"users",
+								"{{userID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "reviews",
+			"item": [
+				{
+					"name": "Create New Review",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "773fed73-fa7c-4ebf-8160-5b5f991d3193",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"review\": \"Good Service!\",\r\n    \"rating\": 4,\r\n    \"boy\": \"{{boyID}}\",\r\n    \"user\": \"{{userID}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/{{apiVersion}}/reviews",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{apiVersion}}",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Reviews",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{bearerToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{url}}:{{port}}/{{apiVersion}}/reviews?rating=4",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{apiVersion}}",
+								"reviews"
+							],
+							"query": [
+								{
+									"key": "rating",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Review",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/{{apiVersion}}/reviews/{{reviewID}}",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{apiVersion}}",
+								"reviews",
+								"{{reviewID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Review",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rating\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/{{apiVersion}}/reviews/{{reviewID}}",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{apiVersion}}",
+								"reviews",
+								"{{reviewID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get A Review",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rating\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/{{apiVersion}}/reviews/{{reviewID}}",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{apiVersion}}",
+								"reviews",
+								"{{reviewID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Boy/Review",
+			"item": [
+				{
+					"name": "Create New Review on Boy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "460fb51c-0c62-4a9c-8171-52ba3f69d5b7",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"reviewID\", jsonData.data.data._id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"review\": \"Keep it up! Good Service!\",\r\n    \"rating\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/{{apiVersion}}/boys/{{boyID}}/reviews/",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{apiVersion}}",
+								"boys",
+								"{{boyID}}",
+								"reviews",
+								""
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Reviews on Boy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/{{apiVersion}}/boys/{{boyID}}/reviews/",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{apiVersion}}",
+								"boys",
+								"{{boyID}}",
+								"reviews",
+								""
+							],
+							"query": [
+								{
+									"key": "ratings",
+									"value": "4",
+									"disabled": true
+								}
 							]
 						}
 					},
