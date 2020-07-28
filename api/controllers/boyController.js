@@ -2,6 +2,7 @@ const Boy = require('./../models/boyModel');
 const APIFeatures = require('./../utils/apiFeatures');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
+const factory = require('./handlerFactory');
 
 exports.getAllBoys = catchAsync(async (req, res, next) => {
   const features = new APIFeatures(Boy.find(), req.query)
@@ -35,47 +36,9 @@ exports.getBoy = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.createBoy = catchAsync(async (req, res, next) => {
-  const newBoy = await Boy.create(req.body);
-  res.status(201).json({
-    status: 'success',
-    data: {
-      boy: newBoy,
-    },
-  });
-});
-
-exports.updateBoy = catchAsync(async (req, res, next) => {
-  const boy = await Boy.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-  });
-
-  if (!boy) {
-    return next(new AppError('No Delivery Boy found with that ID', 404));
-  }
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      boy,
-    },
-  });
-});
-
-exports.deleteBoy = catchAsync(async (req, res, next) => {
-  const boy = await Boy.findByIdAndDelete(req.params.id);
-
-  if (!boy) {
-    return next(new AppError('No Delivery Boy found with that ID', 404));
-  }
-
-  res.status(204).json({
-    status: 'success',
-    data: {
-      boy,
-    },
-  });
-});
+exports.createBoy = factory.createOne(Boy);
+exports.updateBoy = factory.updateOne(Boy);
+exports.deleteBoy = factory.deleteOne(Boy);
 
 exports.getBoyStats = catchAsync(async (req, res, next) => {
   const stats = await Boy.aggregate([

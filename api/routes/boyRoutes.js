@@ -9,12 +9,16 @@ const {
     getMonthlyPlan
 } = require('./../controllers/boyController');
 
+const reviewRouter = require('./../routes/reviewRoutes')
+
 const {
     protect,
     restrictTo,
 } = require('./../controllers/authController');
 
 const router = express.Router();
+
+router.use('/:boyId/reviews', reviewRouter);
 
 router.route('/boy-stats').get(getBoyStats);
 router.route('/monthly-plan/:year').get(getMonthlyPlan);
