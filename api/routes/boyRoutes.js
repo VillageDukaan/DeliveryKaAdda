@@ -1,4 +1,5 @@
 const express = require('express');
+const reviewRouter = require('./../routes/reviewRoutes');
 const {
     getAllBoys,
     createBoy,
@@ -8,8 +9,6 @@ const {
     getBoyStats,
     getMonthlyPlan
 } = require('./../controllers/boyController');
-
-const reviewRouter = require('./../routes/reviewRoutes')
 
 const {
     protect,
@@ -25,13 +24,13 @@ router.route('/monthly-plan/:year').get(getMonthlyPlan);
 
 router
 .route('/')
-.get(protect, getAllBoys)
-.post(createBoy);
+.get(getAllBoys)
+.post(protect, restrictTo('admin'), createBoy);
 
 router
 .route('/:id')
 .get(getBoy)
-.patch(updateBoy)
+.patch(protect, restrictTo('admin'), updateBoy)
 .delete(protect, restrictTo('admin'),deleteBoy);
 
 module.exports = router;
