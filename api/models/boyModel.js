@@ -83,8 +83,10 @@ const boySchema = new mongoose.Schema({
   }
   );
 
-  boySchema.index({ price: 1, ratingsAverage: -1 })
-  boySchema.index({slug: 1})
+  boySchema.index({ price: 1, ratingsAverage: -1 });
+  boySchema.index({ slug: 1 });
+  boySchema.index({ selectedLocation: '2dsphere' });
+
 
   boySchema.virtual('reviews', {
     ref: 'Review',

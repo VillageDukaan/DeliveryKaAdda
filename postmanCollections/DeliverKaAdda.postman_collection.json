@@ -34,11 +34,21 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Mahesh\",\r\n    \"phone\": 9121212123,\r\n    \"travelDistance\": \"Long\",\r\n    \"ratingsAverage\": 2,\r\n    \"ratingsQuantity\": 1000,\r\n    \"price\": 100,\r\n    \"summary\": \"Exquisite wines, scenic views, exclusive barrel tastings,  and much more\",\r\n    \"description\": \"Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\\nIrure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\",\r\n    \"imageCover\": \"tour-7-cover.jpg\",\r\n    \"images\": [\"tour-7-1.jpg\", \"tour-7-2.jpg\", \"tour-7-3.jpg\"],\r\n    \"isApproved\": false\r\n  }",
+							"raw": "{\r\n  \"selectedLocation\": {\r\n      \"description\": \"Rajahmundry\",\r\n      \"type\": \"Point\",\r\n      \"coordinates\": [81.785645, 17.024340],\r\n      \"address\": \"Rajahmundry\"\r\n    },\r\n  \"name\": \"Mahesh\",\r\n  \"phone\": 91212453152,\r\n  \"travelDistance\": \"Long\",\r\n  \"price\": 500,\r\n  \"summary\": \"Delivery Boy\",\r\n  \"imageCover\": \"tour-7-cover.jpg\",\r\n  \"isApproved\": false\r\n  }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -63,14 +73,7 @@
 					"name": "Get All boys",
 					"request": {
 						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{bearerToken}}",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "GET",
 						"header": [
@@ -124,6 +127,16 @@
 				{
 					"name": "Update Boy",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PATCH",
 						"header": [],
 						"body": {
@@ -153,6 +166,16 @@
 				{
 					"name": "Delete Boy",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [
 							{
@@ -191,6 +214,31 @@
 								"{{apiVersion}}",
 								"boys",
 								"boy-stats"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Geospatial Querie to find Delivery boys",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/{{apiVersion}}/boys/boys-within/30/center/16.845577, 82.139409/unit/km",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{apiVersion}}",
+								"boys",
+								"boys-within",
+								"30",
+								"center",
+								"16.845577, 82.139409",
+								"unit",
+								"km"
 							]
 						}
 					},
@@ -257,7 +305,7 @@
 					"response": []
 				},
 				{
-					"name": "login",
+					"name": "Login",
 					"event": [
 						{
 							"listen": "test",
@@ -299,8 +347,60 @@
 					"response": []
 				},
 				{
-					"name": "getAllUsers",
+					"name": "Login as Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5803e6ce-cf87-421a-8f76-b50c65d9ac7b",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"bearerToken\", jsonData.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{adminEmail}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/{{apiVersion}}/users/login",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{apiVersion}}",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -317,6 +417,43 @@
 								{
 									"key": "role",
 									"value": "user"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Current User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/{{apiVersion}}/users/me",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{apiVersion}}",
+								"users",
+								"me"
+							],
+							"query": [
+								{
+									"key": "role",
+									"value": "user",
+									"disabled": true
 								}
 							]
 						}
@@ -487,6 +624,16 @@
 				{
 					"name": "Delete User",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -507,6 +654,16 @@
 				{
 					"name": "Update User",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PATCH",
 						"header": [],
 						"body": {
@@ -568,7 +725,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"review\": \"Good Service!\",\r\n    \"rating\": 4,\r\n    \"boy\": \"{{boyID}}\",\r\n    \"user\": \"{{userID}}\"\r\n}",
+							"raw": "{\r\n    \"review\": \"Update test!\",\r\n    \"rating\": 5,\r\n    \"boy\": \"{{boyID}}\",\r\n    \"user\": \"{{userID}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -631,29 +788,22 @@
 					"response": []
 				},
 				{
-					"name": "Delete Review",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{url}}:{{port}}/{{apiVersion}}/reviews/{{reviewID}}",
-							"host": [
-								"{{url}}"
-							],
-							"port": "{{port}}",
-							"path": [
-								"{{apiVersion}}",
-								"reviews",
-								"{{reviewID}}"
-							]
-						}
+					"name": "Get A Review",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
 					},
-					"response": []
-				},
-				{
-					"name": "Update Review",
 					"request": {
-						"method": "PATCH",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -680,16 +830,53 @@
 					"response": []
 				},
 				{
-					"name": "Get A Review",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
+					"name": "Delete Review",
 					"request": {
-						"method": "GET",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/{{apiVersion}}/reviews/{{reviewID}}",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{apiVersion}}",
+								"reviews",
+								"{{reviewID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"rating\": 3\r\n}",
+							"raw": "{\r\n    \"rating\": 5\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -747,7 +934,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"review\": \"Keep it up! Good Service!\",\r\n    \"rating\": 4\r\n}",
+							"raw": "{\r\n    \"review\": \"Update test!\",\r\n    \"rating\": 4\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

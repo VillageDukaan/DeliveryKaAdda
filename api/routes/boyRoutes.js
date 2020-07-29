@@ -7,7 +7,8 @@ const {
     updateBoy,
     deleteBoy,
     getBoyStats,
-    getMonthlyPlan
+    getMonthlyPlan,
+    getBoysWithin
 } = require('./../controllers/boyController');
 
 const {
@@ -21,6 +22,8 @@ router.use('/:boyId/reviews', reviewRouter);
 
 router.route('/boy-stats').get(getBoyStats);
 router.route('/monthly-plan/:year').get(getMonthlyPlan);
+
+router.route('/boys-within/:distance/center/:latlng/unit/:unit').get(getBoysWithin)
 
 router
 .route('/')
