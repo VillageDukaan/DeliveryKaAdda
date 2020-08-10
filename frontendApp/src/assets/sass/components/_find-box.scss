@@ -1,0 +1,26 @@
+.find {
+  height: 85vh;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba($color-primary-light, 0.8),
+      rgba($color-primary-dark, 0.8)
+    ),
+    url(https://i.ibb.co/t8XzdZS/farming-land.jpg);
+  background-size: cover;
+  background-position: top;
+  position: relative;
+
+  &__icon {
+    font-size: 6rem;
+    margin-bottom: 1rem;
+    color: rgba($color-primary, 0.8);
+  }
+
+  &__text-box {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+}

@@ -1,4 +1,29 @@
+.find-section {
+  height: 85vh;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba($color-primary-light, 0.8),
+      rgba($color-primary-dark, 0.8)
+    ),
+    url(https://i.ibb.co/t8XzdZS/farming-land.jpg);
+  background-size: cover;
+  background-position: top;
+  position: relative;
+}
+
 .about-section {
   background-color: $color-grey-light-first;
   padding: 25rem 0;
+  margin-top: -20vh;
+}
+
+.features-section {
+  padding: 25rem 0;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba($color-primary-light, 0.8),
+      rgba($color-primary-dark, 0.8)
+    ),
+    url(https://i.ibb.co/t8XzdZS/farming-land.jpg);
+  background-size: cover;
 }

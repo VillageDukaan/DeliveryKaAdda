@@ -47,10 +47,18 @@ module.exports = {
         use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
-        test: /\.(jpg|png)$/,
+        test: /\.(jpe?g|png)$/i,
         use: {
           loader: "url-loader",
         },
+      },
+      {
+        test: /\.(ttf|eot|svg|gif|woff)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        use: [
+          {
+            loader: "file-loader",
+          },
+        ],
       },
     ],
   },
