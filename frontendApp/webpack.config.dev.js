@@ -39,6 +39,10 @@ module.exports = {
         use: ["babel-loader", "eslint-loader"],
       },
       {
+        test: /\.mp4$/,
+        use: "file-loader?name=videos/[name].[ext]",
+      },
+      {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
       },

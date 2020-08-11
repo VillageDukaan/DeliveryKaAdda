@@ -11,7 +11,12 @@
 @import "components/composition";
 @import "components/feature-box";
 @import "components/find-box";
+@import "components/card";
+@import "components/story";
+@import "components/bg-video";
 
 @import "layout/header";
-@import "pages/home";
+@import "layout/footer";
 @import "layout/grid";
+
+@import "pages/home";
