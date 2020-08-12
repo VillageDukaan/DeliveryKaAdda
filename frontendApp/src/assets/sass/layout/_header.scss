@@ -3,12 +3,14 @@
   background-color: $color-grey-light-first;
   padding: 1rem 1rem;
 
-  &__logo-box {
-    top: 2rem;
+  &__logo {
+    position: absolute;
+    top: 1rem;
     left: 2rem;
+    height: 6rem;
   }
 
-  &__logo {
-    height: 6rem;
+  &__auth-box {
+    float: right;
   }
 }

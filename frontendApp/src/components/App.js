@@ -6,6 +6,8 @@ import PageNotFound from "./PageNotFound";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "./common/Footer.jsx";
+import Signup from "./register/Signup.jsx";
+import SignupUser from "./register/SignupUser.jsx";
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
+        <Route exact path="/signup" component={Signup} />
+        <Route exact path="/signup-user" component={SignupUser} />
         <Route component={PageNotFound} />
       </Switch>
       <Footer />

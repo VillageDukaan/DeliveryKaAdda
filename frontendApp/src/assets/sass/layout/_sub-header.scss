@@ -1,0 +1,16 @@
+.sub-header {
+  padding: 5rem 0;
+  background: linear-gradient(
+    to right bottom,
+    rgba($color-primary-dark, 0.8),
+    rgba($color-primary, 0.8)
+  );
+  background-size: cover;
+  background-position: top;
+  position: relative;
+
+  &__image {
+    position: absolute;
+    height: 15rem;
+  }
+}

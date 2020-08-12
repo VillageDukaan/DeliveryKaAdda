@@ -1,14 +1,18 @@
 .btn {
+  &,
   &:link,
   &:visited {
     text-transform: uppercase;
     text-decoration: none;
-    padding: 15px 40px;
+    padding: 15px 30px;
     display: inline-block;
     border-radius: 100px;
     transition: all 0.2s;
     position: relative;
     font-size: $default-font-size;
+
+    border: none;
+    cursor: pointer;
   }
 
   &:hover {
@@ -29,6 +33,39 @@
   &--white {
     background-color: $color-white;
     color: $color-grey-dark;
+    border-style: solid;
+    border-color: $color-primary-light;
+  }
+
+  &--purple {
+    background-color: $color-primary;
+    color: $color-white;
+
+    &::after {
+      background-color: $color-primary;
+    }
+  }
+
+  &::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.4s;
+  }
+
+  &--animated {
+    animation: moveInBottom 0.5s ease-out 0.75s;
+    animation-fill-mode: backwards;
+  }
+
+  &:not(:last-child) {
+    margin-right: 1.5rem;
   }
 }
 
