@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const RadioButton = ({ label, type, name, onClick }) => {
+const RadioCheckboxButton = ({ label, type, name, onClick }) => {
   return (
     <>
       <label className="container">
@@ -9,20 +9,20 @@ const RadioButton = ({ label, type, name, onClick }) => {
         <input
           type={type}
           name={name}
-          className="container__radio"
           onClick={onClick}
+          className="container__input"
         />
-        <span className="checkmark"></span>
+        <span className={`checkmark checkmark__${type}`}></span>
       </label>
     </>
   );
 };
 
-RadioButton.propTypes = {
+RadioCheckboxButton.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
 };
 
-export default RadioButton;
+export default RadioCheckboxButton;
