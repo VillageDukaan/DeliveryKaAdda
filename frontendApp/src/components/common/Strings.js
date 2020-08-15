@@ -1,13 +1,24 @@
 //Registration
+export const SIGN_UP = {
+  uri: "/signup",
+  title: "Register",
+  user: "User Registration",
+  user_uri: "/signup-user",
+  delivery_boy: "Delivery Person Registration",
+  delivery_boy_uri: "/signup-delivery-person",
+  name_label: "Full Name",
+  name_placeholder: "Please Enter Your Full Name",
+  email_label: "Email",
+  email_placeholder: "Please Enter Your Email",
+  mobile_label: "Mobile Number",
+  mobile_placeholder: "Please Enter Your Mobile number",
+  password_label: "Password",
+  password_placeholder: "Please Enter Password",
+  confirm_password_label: "Confirm Password",
+  confirm_password_placeholder: "Please Confirm Password",
+  role_lable: "Role",
+};
 
-export const SIGN_UP_URI = "/signup";
-
-export const SIGN_UP_TITLE = "Register";
-export const SIGN_UP_USER = "User Registration";
-export const SIGN_UP_USER_URI = "/signup-user";
-
-export const SIGN_UP_DELIVERY_BOY = "Delivery Person Registration";
-export const SIGN_UP_DELIVERY_BOY_URI = "/signup-delivery-person";
 export const DELIVERY_BOY_REQUIREMNT_ONE = "I am Over 18 Years Old";
 export const DELIVERY_BOY_REQUIREMNT_TWO = "I have my Driving License";
 export const DELIVERY_BOY_REQUIREMNT_THREE = "I have my C-Book";

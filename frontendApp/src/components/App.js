@@ -9,6 +9,8 @@ import Footer from "./common/Footer.jsx";
 import Signup from "./register/Signup.jsx";
 import SignupUser from "./register/SignupUser.jsx";
 import SignupDeliveryBoy from "./register/SignupDeliveryBoy.jsx";
+import PrivateRoute from "./PrivateRoute.jsx";
+import ApplicationForm from "./DeliveryPerson/ApplicationForm.jsx";
 
 function App() {
   return (
@@ -23,6 +25,7 @@ function App() {
           path="/signup-delivery-person"
           component={SignupDeliveryBoy}
         />
+        <PrivateRoute exact path="/application" component={ApplicationForm} />
         <Route component={PageNotFound} />
       </Switch>
       <Footer />
