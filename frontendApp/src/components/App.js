@@ -31,7 +31,7 @@ function App() {
         <Route component={PageNotFound} />
       </Switch>
       <Footer />
-      <ToastContainer autoClose={3000} hideProgressBar />
+      <ToastContainer autoClose={3000} />
     </div>
   );
 }

@@ -1,0 +1,14 @@
+.Toastify__toast {
+  &-body {
+    padding-left: 1.5rem;
+    font-size: 1.5rem;
+  }
+
+  &--success {
+    background-color: $color-primary;
+  }
+
+  &--error {
+    background-color: $color-secondary_dark;
+  }
+}
