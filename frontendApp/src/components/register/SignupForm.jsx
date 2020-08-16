@@ -29,7 +29,7 @@ const SignupForm = ({
     />
     <TextInput
       label={SIGN_UP.mobile_label}
-      type={"text"}
+      type={"number"}
       onChange={handleChange("mobile")}
       value={mobile}
       placeholder={SIGN_UP.mobile_placeholder}
@@ -64,13 +64,13 @@ const SignupForm = ({
 );
 
 SignupForm.propTypes = {
-  handleChange: PropTypes.func.required,
-  clickSubmit: PropTypes.func.required,
-  name: PropTypes.string.required,
-  email: PropTypes.string.required,
-  mobile: PropTypes.number.required,
-  passwordConfirm: PropTypes.string.required,
-  password: PropTypes.string.required,
+  handleChange: PropTypes.func.isRequired,
+  clickSubmit: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  mobile: PropTypes.number.isRequired,
+  passwordConfirm: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
 };
 
 export default SignupForm;

@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "./common/Footer.jsx";
 import Signup from "./register/Signup.jsx";
+import Signin from "./signin/Signin.jsx";
 import SignupUser from "./register/SignupUser.jsx";
 import SignupDeliveryBoy from "./register/SignupDeliveryBoy.jsx";
 import PrivateRoute from "./PrivateRoute.jsx";
@@ -19,6 +20,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/signup" component={Signup} />
+        <Route exact path="/signin" component={Signin} />
         <Route exact path="/signup-user" component={SignupUser} />
         <Route
           exact
@@ -29,7 +31,7 @@ function App() {
         <Route component={PageNotFound} />
       </Switch>
       <Footer />
-      <ToastContainer autoClose={2000} hideProgressBar />
+      <ToastContainer autoClose={3000} hideProgressBar />
     </div>
   );
 }

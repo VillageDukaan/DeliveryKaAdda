@@ -10,7 +10,7 @@ const GoBack = ({ uri }) => (
 );
 
 GoBack.propTypes = {
-  uri: PropTypes.string.required,
+  uri: PropTypes.string.isRequired,
 };
 
 export default GoBack;

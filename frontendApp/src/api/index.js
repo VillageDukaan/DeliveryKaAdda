@@ -1,4 +1,4 @@
-export const signup = async (data) => {
+export const post = async (data, uri) => {
   const config = {
     method: "POST",
     headers: {
@@ -7,7 +7,7 @@ export const signup = async (data) => {
     },
     body: JSON.stringify(data),
   };
-  const url = `${process.env.API_URL}/users/signup`;
+  const url = `${process.env.API_URL}/${uri}`;
   try {
     const response = await (await fetch(url, config)).json();
     return response;

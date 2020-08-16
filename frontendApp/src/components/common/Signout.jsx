@@ -1,5 +1,5 @@
 import React from "react";
-import { signout } from "../../api/auth";
+import { signout } from "../../api";
 
 const Signout = () => {
   return (

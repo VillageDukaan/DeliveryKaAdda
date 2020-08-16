@@ -1,7 +1,7 @@
 import React from "react";
 import MyLogo from "../../assets/images/delivery-ka-adda-2.png";
-import { Link } from "react-router-dom";
-import { isAuthenticated } from "./../../api/auth/index";
+import { Link, withRouter } from "react-router-dom";
+import { isAuthenticated } from "./../../api/index";
 import Signout from "./Signout.jsx";
 
 const Header = () => {
@@ -31,4 +31,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default withRouter(Header);

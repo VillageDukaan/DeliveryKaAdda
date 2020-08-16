@@ -1,24 +1,20 @@
 import React, { useState } from "react";
 import SubHeader from "../common/SubHeader.jsx";
-import { SIGN_UP } from "./../common/Strings";
-import PropTypes from "prop-types";
-import DB from "../../assets/images/delivery_boy.png";
-import { post, authenticate, isAuthenticated } from "../../api/index";
-import SignupForm from "./SignupForm.jsx";
-import GoBack from "../common/GoBack.jsx";
+import SignIn from "../../assets/images/1.png";
+import SigninForm from "./SigninForm.jsx";
+import { post, authenticate, isAuthenticated } from "./../../api/index";
 import { toast } from "react-toastify";
+import GoBack from "../common/GoBack.jsx";
+import { SIGN_UP } from "../common/Strings.js";
 import Spinner from "./../common/Spinner.jsx";
+import { PropTypes } from "prop-types";
 import { Redirect } from "react-router-dom";
 
-const SignupDeliveryBoy = () => {
+const Signin = () => {
   const [values, setValues] = useState({
-    name: "",
     email: "",
-    mobile: "",
     password: "",
-    passwordConfirm: "",
     error: "",
-    role: "delivery-boy",
     loading: false,
     redirect: false,
   });
@@ -27,26 +23,14 @@ const SignupDeliveryBoy = () => {
     setValues({ ...values, error: false, [name]: event.target.value });
   };
 
-  const {
-    name,
-    email,
-    mobile,
-    password,
-    passwordConfirm,
-    role,
-    loading,
-    redirect,
-  } = values;
+  const { email, password, loading, redirect } = values;
 
   const clickSubmit = (event) => {
     event.preventDefault();
     const user = {
       name,
       email,
-      mobile,
       password,
-      passwordConfirm,
-      role,
       redirect,
     };
 
@@ -55,14 +39,14 @@ const SignupDeliveryBoy = () => {
       loading: true,
     });
 
-    const uri = "users/signup";
+    const uri = "users/login";
     post(user, uri).then((data) => {
       if (data.error) {
         setValues({
           ...values,
           loading: false,
         });
-        toast.error(data.error.message);
+        toast.error(data.error);
       } else {
         authenticate(data, () => {
           setValues({
@@ -71,7 +55,7 @@ const SignupDeliveryBoy = () => {
             redirect: true,
           });
         });
-        toast.success("Signup Successful");
+        toast.success("Signin Successful");
       }
     });
   };
@@ -83,33 +67,30 @@ const SignupDeliveryBoy = () => {
   };
 
   return (
-    <>
+    <div>
       {renderRedirect()}
       <SubHeader
-        heading={SIGN_UP.delivery_boy}
-        image={DB}
+        heading="Signin"
+        image={SignIn}
         img_size="util-image-height-small"
       />
       <div className="form__container">
         <GoBack uri={SIGN_UP.uri} />
-        <h2 className="secondary-heading util-margin-bottom-small">Signup</h2>
+        <h2 className="secondary-heading util-margin-bottom-small">Signin</h2>
         {loading ? (
           <Spinner />
         ) : (
-          <SignupForm
-            name={name}
-            email={email}
-            mobile={mobile}
-            password={password}
-            passwordConfirm={passwordConfirm}
-            role={role}
+          <SigninForm
             handleChange={handleChange}
             clickSubmit={clickSubmit}
+            email={email}
+            password={password}
+            loading={loading}
           />
         )}
       </div>
-    </>
+    </div>
   );
 };
 
-export default SignupDeliveryBoy;
+export default Signin;

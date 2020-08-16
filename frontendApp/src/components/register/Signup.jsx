@@ -4,7 +4,7 @@ import { SIGN_UP } from "./../common/Strings";
 import SubHeader from "../common/SubHeader.jsx";
 import Question from "../../assets/images/question_mark.png";
 import { Redirect } from "react-router-dom";
-import { isAuthenticated } from "./../../api/auth/index";
+import { isAuthenticated } from "./../../api/index";
 
 const Signup = () => {
   const [direct, setRedirect] = useState({
@@ -20,7 +20,7 @@ const Signup = () => {
   };
 
   const renderRedirect = () => {
-    if (direct.redirect || isAuthenticated) {
+    if (direct.redirect || isAuthenticated()) {
       return <Redirect to={direct.uri} />;
     }
   };
