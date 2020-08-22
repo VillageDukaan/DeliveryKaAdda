@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import SubHeader from "../common/SubHeader.jsx";
 import { SIGN_UP } from "./../common/Strings";
-import PropTypes from "prop-types";
 import DB from "../../assets/images/delivery_boy.png";
 import { post, authenticate, isAuthenticated } from "../../api/index";
 import SignupForm from "./SignupForm.jsx";
@@ -62,7 +61,7 @@ const SignupDeliveryBoy = () => {
           ...values,
           loading: false,
         });
-        toast.error(data.error.message);
+        toast.error(data.message);
       } else {
         authenticate(data, () => {
           setValues({

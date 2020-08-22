@@ -93,3 +93,28 @@
     transform: translateY(0);
   }
 }
+
+.btn-text__secondary {
+  &:link,
+  &:visited {
+    font-size: $default-font-size;
+    color: $color-secondary-light;
+    display: inline-block;
+    text-decoration: none;
+    border-bottom: 1px solid $color-secondary-light;
+    padding: 3px;
+    transition: all 0.2s;
+  }
+
+  &:hover {
+    background-color: $color-secondary-light;
+    color: $color-white;
+    box-shadow: 0.1rem 0.5rem rgba($color-black, 0.15);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    box-shadow: 0.5rem 0.5rem rgba($color-black, 0.15);
+    transform: translateY(0);
+  }
+}

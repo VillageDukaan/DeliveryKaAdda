@@ -14,13 +14,13 @@ const Header = () => {
         {!isAuthenticated() ? (
           <>
             <Link
-              to="/signin"
-              className="btn-text util-margin-top-small util-margin-right-small"
+              to="/signup"
+              className="btn-text__secondary util-margin-right-small"
             >
-              Sign in
-            </Link>
-            <Link to="/signup" className="btn-text">
               Sign up
+            </Link>
+            <Link to="/signin" className="btn-text util-margin-top-small">
+              Sign in
             </Link>
           </>
         ) : (
