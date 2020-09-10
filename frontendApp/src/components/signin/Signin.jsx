@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 import GoBack from "../common/GoBack.jsx";
 import { SIGN_UP } from "../common/Strings.js";
 import Spinner from "./../common/Spinner.jsx";
-import { PropTypes } from "prop-types";
 import { Redirect } from "react-router-dom";
 
 const Signin = () => {
@@ -61,6 +60,13 @@ const Signin = () => {
   };
 
   const renderRedirect = () => {
+    if (
+      isAuthenticated() &&
+      isAuthenticated().data.role === "delivery_boy" &&
+      !isAuthenticated().data.user.isApplicationSubmitted
+    ) {
+      return <Redirect to="/delivery-person-application" />;
+    }
     if (redirect || isAuthenticated()) {
       return <Redirect to="/" />;
     }

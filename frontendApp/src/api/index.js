@@ -16,6 +16,24 @@ export const post = async (data, uri) => {
   }
 };
 
+export const postWithAuth = async (data, uri) => {
+  const config = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${isAuthenticated().token}`,
+    },
+    body: data,
+  };
+  const url = `${process.env.API_URL}/${uri}`;
+  try {
+    const response = await (await fetch(url, config)).json();
+    return response;
+  } catch (err) {
+    return err;
+  }
+};
+
 export const authenticate = (data, next) => {
   if (typeof window !== "undefined") {
     localStorage.setItem("jwt", JSON.stringify(data));

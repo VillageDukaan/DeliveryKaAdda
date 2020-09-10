@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import TextInput from "./../common/TextInput";
 import { SIGN_UP } from "../common/Strings";
+import RadioCheckboxButton from "./../common/RadioCheckboxButton.jsx";
 
 const SignupForm = ({
   name,
@@ -53,6 +54,26 @@ const SignupForm = ({
       type={"role"}
       value={"Delivery Person"}
       disabled
+    />
+    <RadioCheckboxButton
+      label="I am over 18 years old"
+      name={"checkbox"}
+      type={"checkbox"}
+    />
+    <RadioCheckboxButton
+      label="I have a Two Wheeler and a Drivers Licence"
+      name={"checkbox"}
+      type={"checkbox"}
+    />
+    <RadioCheckboxButton
+      label="I have a Smart Phone"
+      name={"checkbox"}
+      type={"checkbox"}
+    />
+    <RadioCheckboxButton
+      label="I have an Aadhaar Card"
+      name={"checkbox"}
+      type={"checkbox"}
     />
     <button
       className="btn btn--purple util-margin-top-small"

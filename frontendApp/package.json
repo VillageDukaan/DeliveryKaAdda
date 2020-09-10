@@ -1,11 +1,10 @@
 {
   "name": "ps-redux",
-  "description": "React and Redux Pluralsight course by Cory House",
+  "description": "DeliveryKaAdda",
   "scripts": {
-    "start": "run-p start:dev start:api",
+    "start": "run-p start:dev",
     "start:dev": "webpack-dev-server --config webpack.config.dev.js --port 8000",
     "prestart:api": "node tools/createMockDB.js",
-    "start:api": "node tools/apiServer.js",
     "test": "jest --watch"
   },
   "jest": {
@@ -25,6 +24,7 @@
     "bootstrap": "4.3.1",
     "file-loader": "6.0.0",
     "immer": "2.1.3",
+    "leaflet-geosearch": "^3.0.6",
     "node-sass": "^4.14.1",
     "prop-types": "15.7.2",
     "react": "16.8.4",
@@ -33,6 +33,8 @@
     "react-router-dom": "5.0.0",
     "react-toastify": "4.5.2",
     "redux": "4.0.1",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-logger": "^3.0.6",
     "redux-thunk": "2.3.0",
     "reselect": "4.0.0",
     "sass-loader": "^9.0.3",

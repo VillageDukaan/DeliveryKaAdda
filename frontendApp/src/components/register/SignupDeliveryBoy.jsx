@@ -77,7 +77,7 @@ const SignupDeliveryBoy = () => {
 
   const renderRedirect = () => {
     if (redirect || isAuthenticated()) {
-      return <Redirect to="/" />;
+      return <Redirect to="/delivery-person-application" />;
     }
   };
 

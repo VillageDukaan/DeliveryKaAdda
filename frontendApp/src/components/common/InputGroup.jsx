@@ -1,19 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
-const TextInput = ({
+const InputGroup = ({
   name,
-  id,
   label,
   onChange,
   placeholder,
   value,
   type,
-  defaultValue,
   disabled,
-  min,
-  max,
-  accept,
+  onClick,
 }) => {
   return (
     <div className="block">
@@ -22,36 +19,37 @@ const TextInput = ({
       </label>
       <input
         type={type}
-        defaultValue={defaultValue}
         name={name}
-        id={id}
-        className="form-group block__textfield"
+        className="block__textfield"
         placeholder={placeholder}
         value={value}
         onChange={onChange}
         disabled={disabled}
-        min={min}
-        max={max}
-        accept={accept}
       />
+
+      <div className="input-group-append">
+        <Link
+          className="btn-text util-margin-top-small float-right"
+          type="submit"
+          onClick={onClick}
+        >
+          Search
+        </Link>
+      </div>
     </div>
   );
 };
 
-TextInput.propTypes = {
+InputGroup.propTypes = {
   name: PropTypes.string,
-  id: PropTypes.string,
-  defaultValue: PropTypes.string,
   label: PropTypes.string.isRequired,
-  min: PropTypes.string,
-  max: PropTypes.string,
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
   value: PropTypes.string,
   type: PropTypes.string,
   error: PropTypes.string,
-  accept: PropTypes.string,
   disabled: PropTypes.bool,
+  onClick: PropTypes.func,
 };
 
-export default TextInput;
+export default InputGroup;
