@@ -15,7 +15,7 @@ import ApplicationForm from "./DeliveryPerson/ApplicationForm.jsx";
 
 function App() {
   return (
-    <div className="container-fluid">
+    <>
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
@@ -32,7 +32,7 @@ function App() {
       </Switch>
       <Footer />
       <ToastContainer autoClose={3000} />
-    </div>
+    </>
   );
 }
 
